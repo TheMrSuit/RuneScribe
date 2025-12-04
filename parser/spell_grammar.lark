@@ -1,0 +1,72 @@
+// RuneScribe Grammar - Imperative Mystical Syntax with Realm Types
+
+start: spell_program
+
+spell_program: statement*
+
+?statement: invocation
+         | channeling  
+         | weaving
+         | manifestation
+         | speaking
+
+// Core imperative patterns  
+invocation: "INVOKE" ("spirit" | "spirits") variable_list "FROM" realm
+
+channeling: "CHANNEL" "the" "essence" "OF" variable
+
+weaving: "WEAVE" "WITH" "the" "force" "OF" variable
+
+manifestation: "MANIFEST" operation_phrase "AS" variable
+
+speaking: "SPEAK" "FORTH" variable "TO" output_target
+
+// Operation phrases for manifestations
+?operation_phrase: union_op
+                 | difference_op
+                 | fusion_op
+                 | division_op
+                 | power_op
+                 | essence_op
+
+union_op: "their" "union"
+difference_op: "their" "difference"  
+fusion_op: "their" "fusion"
+division_op: "their" "division"
+power_op: "their" "power"
+essence_op: "their" "essence"
+
+// Variable and realm definitions
+variable_list: variable ("AND" variable)*
+variable: IDENTIFIER
+
+?realm: mortal_realm
+      | spirit_realm
+      | shadow_realm
+      | void_realm
+      | astral_realm
+      | divine_realm
+      | temporal_realm
+
+mortal_realm: "the" "mortal" "realm"
+spirit_realm: "the" "spirit" "plane"
+shadow_realm: "the" "shadow" "dimension"
+void_realm: "the" "void" "between"
+astral_realm: "the" "astral" "sea"
+divine_realm: "the" "divine" "sphere"
+temporal_realm: "the" "temporal" "flux"
+
+?output_target: void_target
+              | mortal_eyes_target
+              | sacred_scroll_target
+
+void_target: "the" "void"
+mortal_eyes_target: "the" "mortal" "eyes" 
+sacred_scroll_target: "the" "sacred" "scroll"
+
+// Literals and identifiers  
+IDENTIFIER: /[a-zA-Z_][a-zA-Z0-9_]*/
+
+// Import common patterns
+%import common.WS
+%ignore WS
